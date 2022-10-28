@@ -8,6 +8,8 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DividerItemDecoration
 import biz.filmeroo.premier.R
 import biz.filmeroo.premier.api.ApiFilm
+import biz.filmeroo.premier.api.ApiGenre
+import biz.filmeroo.premier.app.SingletonHolder
 import biz.filmeroo.premier.detail.DetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,6 +25,9 @@ class MainActivity : AppCompatActivity(), FilmPresenter.View {
         super.onCreate(savedInstanceState)
         setupView()
         presenter.start(this)
+
+        if(SingletonHolder.instance?.genreMap == null)
+            presenter.loadGenre(this)
     }
 
     private fun setupView() {
@@ -48,5 +53,9 @@ class MainActivity : AppCompatActivity(), FilmPresenter.View {
 
     override fun displayError() {
         Toast.makeText(this, R.string.connection_error, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun displayGenreResults(results: ApiGenre) {
+        SingletonHolder.instance?.genreMap = results.genres.associate { it.id to it.name } as HashMap<Int, String>
     }
 }

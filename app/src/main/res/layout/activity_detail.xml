@@ -65,17 +65,33 @@
 
             <TextView
                 android:id="@+id/similar_title"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/gutter"
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="@dimen/gutter"
                 android:text="@string/similar_movies"
-                android:textAppearance="@style/Filmeroo.TextAppearance.Heading.XSmall"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textAppearance="@style/Filmeroo.TextAppearance.Heading.Small"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/film_overview"
                 tools:text="Similar movies" />
+
+            <TextView
+                android:id="@+id/view_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/gutter"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="@dimen/gutter"
+                android:drawablePadding="8dp"
+                android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
+                android:text="@string/view_all"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/Filmeroo.TextAppearance.Body.Small"
+                android:textColor="@color/view_all"
+                app:layout_constraintBottom_toBottomOf="@id/similar_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="View all" />
 
 
             <androidx.recyclerview.widget.RecyclerView

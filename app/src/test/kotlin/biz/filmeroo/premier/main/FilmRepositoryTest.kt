@@ -1,6 +1,8 @@
 package biz.filmeroo.premier.main
 
 import biz.filmeroo.premier.api.ApiFilm
+import biz.filmeroo.premier.api.ApiFilmListResponse
+import biz.filmeroo.premier.api.ApiGenre
 import biz.filmeroo.premier.api.FilmService
 import biz.filmeroo.premier.support.Fixtures
 import com.nhaarman.mockito_kotlin.mock
@@ -41,6 +43,28 @@ class FilmRepositoryTest {
         val result = repository.fetchMovie(2).test()
 
         verify(service).movie(2)
+        assertThat(result.values()[0]).isEqualTo(movie)
+    }
+
+    @Test
+    fun `fetches genre list`() {
+        val genre = mock<ApiGenre>()
+        whenever(service.genre()).thenReturn(Single.just(genre))
+
+        val result = repository.fetchGenre().test()
+
+        verify(service).genre()
+        assertThat(result.values()[0]).isEqualTo(genre)
+    }
+
+    @Test
+    fun `fetch similar movie list`() {
+        val movie = mock<ApiFilmListResponse>()
+        whenever(service.similar(106912)).thenReturn(Single.just(movie))
+
+        val result = repository.fetchSimilar(106912).test()
+
+        verify(service).similar(106912)
         assertThat(result.values()[0]).isEqualTo(movie)
     }
 }

@@ -42,4 +42,12 @@ class FilmPresenterTest {
 
         verify(view).displayError()
     }
+
+    @Test
+    fun `fetches genre list`() {
+        val results = Fixtures.genreList()
+        whenever(repository.fetchGenre()).thenReturn(Single.just(results))
+
+        verify(view).displayGenreResults(results)
+    }
 }

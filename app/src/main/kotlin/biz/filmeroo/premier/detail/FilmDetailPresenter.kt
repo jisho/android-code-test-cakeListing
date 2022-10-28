@@ -32,20 +32,11 @@ internal class FilmDetailPresenter @Inject constructor(private val filmRepositor
     }
 
 
-    fun loadGenre(view: View) {
-        addSubscription(filmRepository.fetchGenre()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { list -> view.displayGenreResults(list) },
-                { view.displayError() }
-            ))
-    }
+
 
     internal interface View : PresenterView {
         fun displayMovie(movie: ApiFilm)
         fun displayError()
         fun displaySimilarResults(results: List<ApiFilm>)
-        fun displayGenreResults(results: ApiGenre)
     }
 }

@@ -8,9 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import biz.filmeroo.premier.R
 import biz.filmeroo.premier.api.ApiFilm
-import biz.filmeroo.premier.api.ApiGenre
 import biz.filmeroo.premier.api.FilmService
-import biz.filmeroo.premier.app.SingletonHolder
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -36,8 +34,7 @@ class DetailActivity : AppCompatActivity(),
         presenter.start(this)
         setupRecycleView()
 
-        if(SingletonHolder.instance?.genreMap == null)
-            presenter.loadGenre(this)
+
 
         presenter.loadMovie(this, intent.extras?.getLong(EXTRA_ID, -1) ?: -1)
         presenter.loadSimilarMovie(this, intent.extras?.getLong(EXTRA_ID, -1) ?: -1)
@@ -64,10 +61,6 @@ class DetailActivity : AppCompatActivity(),
 
     override fun displaySimilarResults(results: List<ApiFilm>) {
         adapter.submitList(results)
-    }
-
-    override fun displayGenreResults(results: ApiGenre) {
-        SingletonHolder.instance?.genreMap = results.genres.associate { it.id to it.name } as HashMap<Int, String>
     }
 
     override fun onDestroy() {
