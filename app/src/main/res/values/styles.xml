@@ -27,6 +27,11 @@
         <item name="lineHeight">28sp</item>
     </style>
 
+    <style name="Filmeroo.TextAppearance.Heading.XSmall">
+        <item name="android:textSize">14sp</item>
+        <item name="lineHeight">20sp</item>
+    </style>
+
     <style name="Filmeroo.TextAppearance.Body">
         <item name="android:textColor">#2E3333</item>
     </style>

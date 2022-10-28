@@ -1,6 +1,7 @@
 package biz.filmeroo.premier.detail
 
 import biz.filmeroo.premier.api.ApiFilm
+import biz.filmeroo.premier.api.ApiGenre
 import biz.filmeroo.premier.base.Presenter
 import biz.filmeroo.premier.base.PresenterView
 import biz.filmeroo.premier.main.FilmRepository
@@ -20,8 +21,31 @@ internal class FilmDetailPresenter @Inject constructor(private val filmRepositor
                 ))
     }
 
+    fun loadSimilarMovie(view: View,movieId: Long) {
+        addSubscription(filmRepository.fetchSimilar(movieId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { list -> view.displaySimilarResults(list) },
+                { view.displayError() }
+            ))
+    }
+
+
+    fun loadGenre(view: View) {
+        addSubscription(filmRepository.fetchGenre()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { list -> view.displayGenreResults(list) },
+                { view.displayError() }
+            ))
+    }
+
     internal interface View : PresenterView {
         fun displayMovie(movie: ApiFilm)
         fun displayError()
+        fun displaySimilarResults(results: List<ApiFilm>)
+        fun displayGenreResults(results: ApiGenre)
     }
 }

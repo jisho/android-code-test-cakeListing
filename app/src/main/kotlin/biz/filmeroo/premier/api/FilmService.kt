@@ -9,6 +9,12 @@ interface FilmService {
     @GET("movie/top_rated")
     fun topRated(): Single<ApiFilmListResponse>
 
+    @GET("movie/{movie_id}/similar")
+    fun similar(@Path("movie_id") movieId: Long): Single<ApiFilmListResponse>
+
+    @GET("genre/movie/list")
+    fun genre(): Single<ApiGenre>
+
     @GET("movie/{movie_id}")
     fun movie(@Path("movie_id") movieId: Long): Single<ApiFilm>
 

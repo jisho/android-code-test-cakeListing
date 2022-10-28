@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:paddingRight="@dimen/gutter">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="144dp"
+        android:layout_height="212dp"
+        android:layout_marginEnd="@dimen/gutter"
+        android:importantForAccessibility="no"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintDimensionRatio="h,16:9"
+        tools:background="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/genre"
+        android:layout_width="@dimen/similar_item_title_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/image"
+        android:lines="1"
+        android:textAppearance="@style/Filmeroo.TextAppearance.Body.XSmall"
+        android:textColor="@color/color_515153"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:text="Action" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="@dimen/similar_item_title_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/image"
+        android:lines="1"
+        android:textAppearance="@style/Filmeroo.TextAppearance.Heading.XSmall"
+        app:layout_constraintTop_toBottomOf="@+id/image"
+        tools:text="The Godfather I" />
+
+
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="@dimen/similar_rating_width"
+        android:layout_height="@dimen/similar_rating_height"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_rating"
+        android:drawablePadding="6dp"
+        android:padding="6dp"
+        android:textAppearance="@style/Filmeroo.TextAppearance.Body.Small"
+        android:textColor="@android:color/white"
+        app:drawableStartCompat="@drawable/ic_star"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/genre"
+        tools:text="8.4" />
+</androidx.constraintlayout.widget.ConstraintLayout>

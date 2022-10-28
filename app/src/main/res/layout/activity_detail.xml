@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -22,14 +21,15 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/gutter">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/film_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/gutter"
                 android:layout_marginTop="24dp"
+                android:layout_marginRight="@dimen/gutter"
                 app:layout_constraintDimensionRatio="h,16:9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,9 @@
                 android:id="@+id/film_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/gutter"
                 android:layout_marginTop="24dp"
+                android:layout_marginRight="@dimen/gutter"
                 android:textAppearance="@style/Filmeroo.TextAppearance.Heading.Medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,12 +54,41 @@
                 android:id="@+id/film_overview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/gutter"
                 android:layout_marginTop="8dp"
+                android:layout_marginRight="@dimen/gutter"
                 android:textAppearance="@style/Filmeroo.TextAppearance.Body.Small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/film_title"
                 tools:text="Movie overview" />
+
+            <TextView
+                android:id="@+id/similar_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/gutter"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="@dimen/gutter"
+                android:text="@string/similar_movies"
+                android:textAppearance="@style/Filmeroo.TextAppearance.Heading.XSmall"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/film_overview"
+                tools:text="Similar movies" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/gutter"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/similar_title" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </LinearLayout>

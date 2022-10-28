@@ -4,4 +4,9 @@
     <dimen name="image_width">92dp</dimen>
     <dimen name="image_height">134dp</dimen>
     <dimen name="image_corner_radius">4dp</dimen>
+    <dimen name="similar_image_width">114dp</dimen>
+    <dimen name="similar_image_height">212dp</dimen>
+    <dimen name="similar_rating_width">60dp</dimen>
+    <dimen name="similar_rating_height">32dp</dimen>
+    <dimen name="similar_item_title_width">114dp</dimen>
 </resources>
