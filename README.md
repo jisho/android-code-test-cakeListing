@@ -26,3 +26,13 @@ Using third-party libraries is okay.
 
 ### Please fork this repo and create a PR back to this one for this task
 (If you are unsure how to do this, please contact your recruiter and someone will be able to help)
+
+
+### Similar Feature Development Note
+
+- Similar movie feature added within DetailActivity, Within FilmDetailPresenter added loadSimilarMovie
+- FilmSimilar adapter added for UI
+- For Genre mapping New genre fetching added under FilmPresenter
+- Genre fetching logic implemented for one time for each app launch using SingletonHolder util class
+- View all click screen not added
+- Test method added under test

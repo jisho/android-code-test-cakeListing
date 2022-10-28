@@ -3,6 +3,7 @@ package biz.filmeroo.premier.detail
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,7 +35,7 @@ class DetailActivity : AppCompatActivity(),
         presenter.start(this)
         setupRecycleView()
 
-
+        view_all.setOnClickListener(View.OnClickListener { Toast.makeText(this,"Not implemented",Toast.LENGTH_SHORT).show() })
 
         presenter.loadMovie(this, intent.extras?.getLong(EXTRA_ID, -1) ?: -1)
         presenter.loadSimilarMovie(this, intent.extras?.getLong(EXTRA_ID, -1) ?: -1)
