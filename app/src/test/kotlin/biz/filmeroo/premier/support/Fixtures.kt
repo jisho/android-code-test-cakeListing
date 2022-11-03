@@ -1,33 +1,21 @@
 package biz.filmeroo.premier.support
 
-import biz.filmeroo.premier.api.ApiFilm
-import biz.filmeroo.premier.api.ApiFilmListResponse
-import biz.filmeroo.premier.api.ApiGenre
-import biz.filmeroo.premier.api.ApiGenreItem
+import biz.filmeroo.premier.api.*
 
 object Fixtures {
 
-    fun film(id: Long): ApiFilm {
-        return ApiFilm(
-            id = id,
-            title = "Waterworld",
-            overview = "Kevin Costner on a boat",
-            posterPath = "/123.jpg",
-            backdropPath = "/456.jpg",
-            voteAverage = "5.5",
-            genreId= listOf(28)
+    fun cake(id: Long): ApiCakeItem {
+        return ApiCakeItem(
+            title = "Lemon cheesecake",
+            desc = "A cheesecake made of lemon",
+            image = "https://s3-eu-west-1.amazonaws.com/s3.mediafileserver.co.uk/carnation/WebFiles/RecipeImages/lemoncheesecake_lg.jpg",
         )
     }
 
-    fun filmList(): List<ApiFilm> {
-        return listOf(film(123), film(456))
-    }
-
-    fun filmResponse(): ApiFilmListResponse {
-        return ApiFilmListResponse(filmList())
-    }
-
-    fun genreList(): ApiGenre {
-        return ApiGenre(listOf(ApiGenreItem("Action",28)))
+    fun cakeList(): List<ApiCakeItem> {
+        return listOf(cake(123), cake(456),cake(123), cake(456),cake(456),
+            cake(123), cake(456),cake(123), cake(456),cake(456),
+            cake(123), cake(456),cake(123), cake(456),cake(456),
+            cake(123), cake(456),cake(123), cake(456),cake(456))
     }
 }

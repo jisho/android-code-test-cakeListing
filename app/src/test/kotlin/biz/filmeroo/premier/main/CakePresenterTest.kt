@@ -10,44 +10,36 @@ import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Test
 
-class FilmPresenterTest {
+class CakePresenterTest {
 
-    private val repository: FilmRepository = mock()
-    private val view: FilmPresenter.View = mock()
+    private val repository: CakeRepository = mock()
+    private val view: CakePresenter.View = mock()
 
-    private lateinit var presenter: FilmPresenter
+    private lateinit var presenter: CakePresenter
 
     @Before
     fun setUp() {
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
 
-        presenter = FilmPresenter(repository)
+        presenter = CakePresenter(repository)
     }
 
     @Test
     fun `binding fetches and displays list`() {
-        val results = Fixtures.filmList()
-        whenever(repository.fetchTopRated()).thenReturn(Single.just(results))
+        val results = Fixtures.cakeList()
+        whenever(repository.fetchCake()).thenReturn(Single.just(results))
 
         presenter.start(view)
 
-        verify(view).displayResults(results)
+        verify(view).displayCakeResults(results)
     }
 
     @Test
     fun `errors fetching results are displayed`() {
-        whenever(repository.fetchTopRated()).thenReturn(Single.error(Exception()))
+        whenever(repository.fetchCake()).thenReturn(Single.error(Exception()))
 
         presenter.start(view)
 
         verify(view).displayError()
-    }
-
-    @Test
-    fun `fetches genre list`() {
-        val results = Fixtures.genreList()
-        whenever(repository.fetchGenre()).thenReturn(Single.just(results))
-
-        verify(view).displayGenreResults(results)
     }
 }

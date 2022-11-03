@@ -2,8 +2,7 @@ package biz.filmeroo.premier.app
 
 import android.content.Context
 import android.content.res.Resources
-import biz.filmeroo.premier.R
-import biz.filmeroo.premier.api.FilmService
+import biz.filmeroo.premier.api.CakeService
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import dagger.Module
@@ -12,8 +11,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -27,33 +26,27 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideFilmService(client: OkHttpClient): FilmService {
+    fun provideFilmService(client: OkHttpClient): CakeService {
+
+
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.apply { interceptor.level = HttpLoggingInterceptor.Level.BODY }
+        val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+
         return Retrofit.Builder()
-                .baseUrl(FilmService.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(Gson()))
-                .client(client)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build()
-                .create(FilmService::class.java)
+            .baseUrl(CakeService.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(Gson()))
+            .client(client)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+            .create(CakeService::class.java)
     }
 
     @Provides
     @Singleton
     fun provideOkHttpClient(resources: Resources): OkHttpClient {
         return OkHttpClient.Builder()
-                .addInterceptor(createAuthInterceptor(resources))
-                .build()
-    }
-
-    private fun createAuthInterceptor(resources: Resources): Interceptor {
-        return Interceptor { chain ->
-            val updatedUrl = chain.request().url().newBuilder()
-                    .addQueryParameter(FilmService.API_KEY_PARAM, resources.getString(R.string.api_key))
-                    .build()
-            chain.proceed(chain.request().newBuilder()
-                    .url(updatedUrl)
-                    .build())
-        }
+            .build()
     }
 
     @Provides
