@@ -6,11 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import biz.filmeroo.premier.R
 import biz.filmeroo.premier.api.ApiCakeItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), CakePresenter.View {
@@ -39,6 +41,11 @@ class MainActivity : AppCompatActivity(), CakePresenter.View {
         recycler.addItemDecoration(dividerItemDecoration)
 
         adapter.setOnClick { item -> Toast.makeText(this, item.title, Toast.LENGTH_SHORT).show()}
+
+        swipeToRefresh.setOnRefreshListener(OnRefreshListener {
+            adapter.notifyItemRangeChanged(0, 4);
+            presenter.start(this)
+        })
     }
 
     override fun onDestroy() {
@@ -47,10 +54,15 @@ class MainActivity : AppCompatActivity(), CakePresenter.View {
     }
 
     override fun displayCakeResults(results: List<ApiCakeItem>) {
-        adapter.submitList(results.distinct().toList().sortedBy { it.title })
+        swipeToRefresh.isRefreshing = false
+
+        if (results.isNotEmpty())
+         adapter.submitList(results.distinct().toList().sortedBy { it.title })
+        else Toast.makeText(this, R.string.connection_error, Toast.LENGTH_SHORT).show()
     }
 
     override fun displayError() {
+        swipeToRefresh.isRefreshing = false
         Toast.makeText(this, R.string.connection_error, Toast.LENGTH_SHORT).show()
     }
 }
